@@ -42,15 +42,15 @@ export default function Home() {
           <section className='flex gap-8 p-4'>
             <div >
               <label >Minimum Customer per Hour</label>
-              <input type="text" value={minCustomerPerHour} onChange={e => setMinCustomerPerHour(e.target.value)}/>
+              <input type="number" value={minCustomerPerHour} onChange={e => setMinCustomerPerHour(e.target.value)}/>
             </div>
             <div>
               <label>Maximum Customers per Hour</label>
-              <input value={maxCustomersPerHour} onChange={e => setMaxCustomerPerHour(e.target.value)} type="text" />
+              <input value={maxCustomersPerHour} onChange={e => setMaxCustomerPerHour(e.target.value)} type="number" />
             </div>
             <div>
               <label>Average Cookies per Sale</label>
-              <input type="text" value={avgCookiesPerSale} onChange={e => setAvgCookiesPerSale(e.target.value)}/>
+              <input type="number" value={avgCookiesPerSale} onChange={e => setAvgCookiesPerSale(e.target.value)}/>
             </div>
             <button type="submit" className="px-4 bg-green-600 rounded-xl">create</button>
           </section>

@@ -1,6 +1,8 @@
 import { hours } from "../public/data";
+import { motion } from "framer-motion";
 export default function LocationsData({ cookieStnds }) {
   return (
+    // <motion.div whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }} />
     <>
       {cookieStnds.map((itm, index) => {
         return (

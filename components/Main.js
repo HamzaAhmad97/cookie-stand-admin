@@ -3,10 +3,18 @@ import CreateForm from "./CreateForm";
 import ReportTable from "./ReportTable";
 import { useState, useEffect } from "react";
 import { hourly_sales } from "../public/hourly_sales";
-
+import Swal from 'sweetalert2'
 export default function Main() {
   const [cookieStnds, setCookieStands] = useState([]);
   const handleNewCookiesStand = (location ) => {
+      if (cookieStnds.map(itm => itm.location).includes(location)) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'City is already added!',
+          })
+          return
+      }
     setCookieStands((prevStands) => {
       return [
         ...prevStands,

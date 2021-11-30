@@ -1,7 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-export default function CreateForm() {
-    const [cookieStands, setCookieStands] = useState([])
+export default function CreateForm({handleNewCookiesStand}) {
     const [minCustomerPerHour, setMinCustomerPerHour] = useState(0)
     const [location, setLocation] = useState('')
     const [maxCustomersPerHour, setMaxCustomerPerHour] = useState(0)
@@ -9,12 +8,12 @@ export default function CreateForm() {
     
     const handleAddStand = (e) => {
       e.preventDefault()
-      setCookieStands(prevStands => [...prevStands, {minCustomerPerHour, location, maxCustomersPerHour, avgCookiesPerSale}])
+      handleNewCookiesStand(location)
     } 
     return(
         <form
         onSubmit={handleAddStand}
-        className="flex-col content-center justify-center p-4 m-auto bg-green-300 rounded-lg w-min md:flex-row"
+        className="flex-col content-center justify-center w-7/12 p-4 m-auto bg-green-300 rounded-lg md:flex-row"
       >
         <h2 className="p-4 text-2xl text-center w-100">Create Cookie Stand</h2>
         <div className="flex gap-2 p-4 min-w-max">
@@ -24,29 +23,33 @@ export default function CreateForm() {
             type="text"
             className="flex-grow"
             onChange={(e) => setLocation(e.target.value)}
+            required
           />
         </div>
 
-        <section className="flex gap-8 p-4">
-          <div>
-            <label>Minimum Customer per Hour</label>
+        <section className="flex flex-row flex-wrap justify-between gap-4 p-4 w-100">
+          <div className='flex flex-col justify-center flex-grow p-2 align-middle bg-green-100 '>
+            <label className="m-auto">Minimum Customer per Hour</label>
             <input
+            className="pl-2"
               type="number"
               value={minCustomerPerHour}
               onChange={(e) => setMinCustomerPerHour(e.target.value)}
             />
           </div>
-          <div>
-            <label>Maximum Customers per Hour</label>
+          <div className='flex flex-col justify-center flex-grow p-2 align-middle bg-green-100'>
+            <label className="m-auto">Maximum Customers per Hour</label>
             <input
+            className="pl-2"
               value={maxCustomersPerHour}
               onChange={(e) => setMaxCustomerPerHour(e.target.value)}
               type="number"
             />
           </div>
-          <div>
-            <label>Average Cookies per Sale</label>
+          <div className='flex flex-col justify-center flex-grow p-2 align-middle bg-green-100'>
+            <label className="m-auto">Average Cookies per Sale</label>
             <input
+            className="pl-2"
               type="number"
               value={avgCookiesPerSale}
               onChange={(e) => setAvgCookiesPerSale(e.target.value)}

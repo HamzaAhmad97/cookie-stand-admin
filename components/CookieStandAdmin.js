@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Header from "./Header";
 import Main from "./Main";
-
+import Footer from "./Footer";
 export default function CookieStandAdmin() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screenbg-green-100 ">
@@ -17,9 +17,7 @@ export default function CookieStandAdmin() {
 
       <Main />
 
-      <footer className="w-full h-10 py-2 text-center bg-green-500">
-        All rights reserved &copy; Hamza Ahmad 2021
-      </footer>
+      <Footer />
     </div>
   );
 }

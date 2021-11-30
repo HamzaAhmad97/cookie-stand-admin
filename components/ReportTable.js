@@ -17,29 +17,35 @@ export default function ReportTable(props) {
     <>
       {props.cookieStnds.length ? (
         <table className="w-7/12 m-auto mt-8 table-auto">
-          <tr>
-            <th className="w-2/12 bg-green-500 border border-none">Location</th>
-            {hours.map((itm, idx) => (
-              <th key={idx} className="bg-green-500 border-none">
-                {itm}
+          <thead>
+            <tr>
+              <th className="w-2/12 bg-green-500 border border-none">
+                Location
               </th>
-            ))}
-            <th className="bg-green-500 border-none">Totals</th>
-          </tr>
-
-          <LocationsData {...props} />
-
-          <tr>
-            <th className="bg-green-500 border-none">Totals</th>
-            {totals.map((itm, idx) => (
-              <th key={idx} className="bg-green-500 border-none">
-                {itm}
+              {hours.map((itm, idx) => (
+                <th key={idx} className="bg-green-500 border-none">
+                  {itm}
+                </th>
+              ))}
+              <th className="bg-green-500 border-none">Totals</th>
+            </tr>
+          </thead>
+          <tbody>
+            <LocationsData {...props} />
+          </tbody>
+          <tfoot>
+            <tr>
+              <th className="bg-green-500 border-none">Totals</th>
+              {totals.map((itm, idx) => (
+                <th key={idx} className="bg-green-500 border-none">
+                  {itm}
+                </th>
+              ))}
+              <th className="bg-green-500 border-none">
+                {totals.reduce((tot, itm) => tot + itm, 0)}
               </th>
-            ))}
-            <th className="bg-green-500 border-none">
-              {totals.reduce((tot, itm) => tot + itm, 0)}
-            </th>
-          </tr>
+            </tr>
+          </tfoot>
         </table>
       ) : (
         <h2 className="mt-12 text-3xl text-center">

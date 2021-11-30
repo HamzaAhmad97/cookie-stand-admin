@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Head from "next/head";
 import styles from "../style/index.module.css";
+import Header from "./Header";
 
 export default function CookieStandAdmin() {
     const [cookieStands, setCookieStands] = useState([])
@@ -23,9 +24,7 @@ export default function CookieStandAdmin() {
         />
       </Head>
 
-      <header className="w-full p-4 bg-green-500">
-        <h1 className="text-4xl">Cookie Stand Admin</h1>
-      </header>
+      <Header/>
 
       <main className={"my-8 w-full" + ` ${styles.main_content}`}>
         <form

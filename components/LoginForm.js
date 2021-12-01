@@ -1,13 +1,12 @@
 import { useState } from "react";
 import { useAuth } from "../contexts/auth";
 export default function LoginForm() {
-  const {login} = useAuth();
+  const { login } = useAuth();
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const handleLogin = (e) => {
     e.preventDefault();
-    //console.log(auth)
-    login(userName, password)
+    login(userName, password);
   };
   return (
     <div className="relative min-h-screen border border-black">

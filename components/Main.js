@@ -1,32 +1,24 @@
 import styles from "../style/index.module.css";
 import CreateForm from "./CreateForm";
 import ReportTable from "./ReportTable";
-import { useState, useEffect } from "react";
-import { hourly_sales } from "../public/hourly_sales";
-import Swal from "sweetalert2";
+import { useState } from "react";
 import useResource from "../hooks/useResource";
-import { useAuth } from "../contexts/auth";
 export default function Main() {
   const { createResource } = useResource();
-  const {user} = useAuth()
   const [cookieStnds, setCookieStands] = useState([]);
-  const handleNewCookiesStand = (location) => {
-    if (cookieStnds.map((itm) => itm.location).includes(location)) {
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "City is already added!",
-      });
-      return;
-    }
-
+  const handleNewCookiesStand = ({
+    location,
+    minCustomerPerHour,
+    maxCustomersPerHour,
+    avgCookiesPerSale,
+  }) => {
     createResource({
-      "location":location,
-      "description": "description",
-      "hourly_sales": 100,
-      "minimum_customers_per_hour": 20,
-      "maximum_customers_per_hour": 100,
-      "average_cookies_per_sale": 5.0,
+      location: location,
+      description: "description",
+      hourly_sales: 100,
+      minimum_customers_per_hour: Number(minCustomerPerHour),
+      maximum_customers_per_hour: Number(maxCustomersPerHour),
+      average_cookies_per_sale: Number(avgCookiesPerSale).toFixed(2),
     });
   };
   return (

@@ -1,15 +1,22 @@
-import { useState} from "react";
+import { useState } from "react";
 import { useAuth } from "../contexts/auth";
 export default function CreateForm({ handleNewCookiesStand }) {
   const [minCustomerPerHour, setMinCustomerPerHour] = useState(0);
   const [location, setLocation] = useState("");
   const [maxCustomersPerHour, setMaxCustomerPerHour] = useState(0);
   const [avgCookiesPerSale, setAvgCookiesPerSale] = useState(0);
-  const {addRow} = useAuth()
+  const { addRow } = useAuth();
   const handleAddStand = (e) => {
     e.preventDefault();
-    handleNewCookiesStand(location);
-    addRow()
+    console.log(typeof avgCookiesPerSale);
+    handleNewCookiesStand({
+      location,
+      minCustomerPerHour,
+      maxCustomersPerHour,
+      avgCookiesPerSale,
+    });
+
+    addRow();
   };
   return (
     <form
@@ -56,7 +63,10 @@ export default function CreateForm({ handleNewCookiesStand }) {
             onChange={(e) => setAvgCookiesPerSale(e.target.value)}
           />
         </div>
-        <button type="submit" className="px-4 bg-green-600 rounded-xl">
+        <button
+          type="submit"
+          className="px-4 bg-green-600 rounded-xl hover:bg-green-500"
+        >
           create
         </button>
       </section>

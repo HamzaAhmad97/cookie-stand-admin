@@ -1,22 +1,19 @@
 import { hours } from "../public/data";
 import LocationsData from "./LocationsData";
 import useResource from "../hooks/useResource";
-import { useEffect } from "react";
-import Image from 'next/image'
 import { hourly_sales } from "../public/hourly_sales";
-export default function ReportTable(props) {
+export default function ReportTable() {
   const { resources, loading } = useResource();
 
-  let totals = new Array(14).fill(0)
-  if (!loading){
+  let totals = new Array(14).fill(0);
+  if (!loading) {
     totals = totals.map((_, idx) =>
-    resources
-      .map((item) => hourly_sales)
-      .map((val) => val[idx])
-      .reduce((tot, elem) => tot + elem, 0)
-  );
+      resources
+        .map((_) => hourly_sales)
+        .map((val) => val[idx])
+        .reduce((tot, elem) => tot + elem, 0)
+    );
   }
-
 
   return (
     <>
@@ -37,8 +34,7 @@ export default function ReportTable(props) {
               </tr>
             </thead>
             <tbody>
-              <LocationsData
-              />
+              <LocationsData />
             </tbody>
             <tfoot>
               <tr>
@@ -61,10 +57,10 @@ export default function ReportTable(props) {
         )
       ) : (
         <img
-      src="https://icaengineeringacademy.com/wp-content/uploads/2019/01/ajax-loading-gif-transparent-background-2.gif"
-      alt="loading"
-      className="w-40 h-40 m-auto mt-10"
-    /> 
+          src="https://icaengineeringacademy.com/wp-content/uploads/2019/01/ajax-loading-gif-transparent-background-2.gif"
+          alt="loading"
+          className="w-40 h-40 m-auto mt-10"
+        />
       )}
     </>
   );

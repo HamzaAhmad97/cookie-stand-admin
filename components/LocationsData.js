@@ -1,4 +1,3 @@
-import { hours } from "../public/data";
 import { motion } from "framer-motion";
 import { useAuth } from "../contexts/auth";
 import useResource from "../hooks/useResource";
@@ -6,22 +5,19 @@ import { useEffect, useState } from "react";
 import { hourly_sales } from "../public/hourly_sales";
 export default function LocationsData() {
   const { resources, loading, deleteResource } = useResource();
-  const { newRow, resetNewRow, addRow } = useAuth();
-  const [res, setResources] = useState(resources)
-  
+  const { newRow, resetNewRow } = useAuth();
+  const [res, setRes] = useState(resources);
+
   useEffect(() => {
     resetNewRow();
-  },[resources])
-  useEffect(() => {
+    setRes(resources);
+  }, [resources]);
 
-    resetNewRow();
-      
-  }, [res]);
+  const handleDelete = (id) => {
+    setRes(res.filter((itm) => itm.id != id));
+    deleteResource(id);
+  };
 
-  const handleDelete = id => {
-    setResources(res.slice(0,-1))
-    deleteResource(id)
-  }
   return (
     <>
       {!loading ? (
@@ -35,7 +31,11 @@ export default function LocationsData() {
                   }`}
                 >
                   {itm.location}
-                  <img className="cursor-pointer" onClick={() => handleDelete(itm.id)} src="https://img.icons8.com/plasticine/24/00ff00/filled-trash.png"/>
+                  <img
+                    className="cursor-pointer"
+                    onClick={() => handleDelete(itm.id)}
+                    src="https://img.icons8.com/plasticine/24/00ff00/filled-trash.png"
+                  />
                 </th>
                 {hourly_sales.map((itm, idx) => (
                   <td
@@ -64,7 +64,7 @@ export default function LocationsData() {
         <h1>Loading ...</h1>
       )}
       {newRow ? (
-        <tr className="bg-green-500 animate-pulse w-100">
+        <tr className="bg-green-500 border border-black animate-pulse w-100">
           {new Array(16).fill(0).map((itm) => (
             <td>&nbsp;</td>
           ))}

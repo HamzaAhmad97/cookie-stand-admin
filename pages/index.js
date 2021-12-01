@@ -1,7 +1,8 @@
 import CookieStandAdmin from "../components/CookieStandAdmin";
 import LoginForm from "../components/LoginForm";
+import { useAuth } from "../contexts/auth";
 export default function Home() {
-  let username = null
-  return username ? <CookieStandAdmin /> : <LoginForm/>
+  const {user} = useAuth()
+  return user ? <CookieStandAdmin /> : <LoginForm/>
 
 }

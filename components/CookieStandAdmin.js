@@ -2,6 +2,7 @@ import Head from "next/head";
 import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
+import { useAuth } from "../contexts/auth";
 export default function CookieStandAdmin() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screenbg-green-100 ">

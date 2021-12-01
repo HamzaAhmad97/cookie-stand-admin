@@ -1,14 +1,15 @@
-import { useState, useEffect } from "react";
-
+import { useState} from "react";
+import { useAuth } from "../contexts/auth";
 export default function CreateForm({ handleNewCookiesStand }) {
   const [minCustomerPerHour, setMinCustomerPerHour] = useState(0);
   const [location, setLocation] = useState("");
   const [maxCustomersPerHour, setMaxCustomerPerHour] = useState(0);
   const [avgCookiesPerSale, setAvgCookiesPerSale] = useState(0);
-
+  const {addRow} = useAuth()
   const handleAddStand = (e) => {
     e.preventDefault();
     handleNewCookiesStand(location);
+    addRow()
   };
   return (
     <form
@@ -16,12 +17,12 @@ export default function CreateForm({ handleNewCookiesStand }) {
       className="flex-col content-center justify-center w-7/12 p-4 m-auto bg-green-300 rounded-lg md:flex-row"
     >
       <h2 className="p-4 text-2xl text-center w-100">Create Cookie Stand</h2>
-      <div className="flex gap-2 p-4 min-w-max">
+      <div className="flex gap-2 p-4 w-100">
         <label>Location</label>
         <input
           value={location}
           type="text"
-          className="flex-grow"
+          className="flex-grow "
           onChange={(e) => setLocation(e.target.value)}
           required
         />

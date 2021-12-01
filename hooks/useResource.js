@@ -29,7 +29,7 @@ export default function useResource() {
     async function createResource(info) {
 
         try {
-            await axios.post(apiUrl, info, config());
+            const res = await axios.post(apiUrl, info, config());
             mutate(); // mutate causes complete collection to be refetched
         } catch (error) {
             handleError(error);

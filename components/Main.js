@@ -1,33 +1,26 @@
 import styles from "../style/index.module.css";
 import CreateForm from "./CreateForm";
 import ReportTable from "./ReportTable";
-import { useState, useEffect } from "react";
-import { hourly_sales } from "../public/hourly_sales";
-import Swal from "sweetalert2";
+import { useState } from "react";
+import useResource from "../hooks/useResource";
 export default function Main() {
+  const { createResource } = useResource();
   const [cookieStnds, setCookieStands] = useState([]);
-  const handleNewCookiesStand = (location) => {
-    if (cookieStnds.map((itm) => itm.location).includes(location)) {
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "City is already added!",
-      });
-      return;
-    }
-    setCookieStands((prevStands) => {
-      return [
-        ...prevStands,
-        {
-          location,
-          hourly_sales,
-        },
-      ];
+  const handleNewCookiesStand = ({
+    location,
+    minCustomerPerHour,
+    maxCustomersPerHour,
+    avgCookiesPerSale,
+  }) => {
+    createResource({
+      location: location,
+      description: "description",
+      hourly_sales: 100,
+      minimum_customers_per_hour: Number(minCustomerPerHour),
+      maximum_customers_per_hour: Number(maxCustomersPerHour),
+      average_cookies_per_sale: Number(avgCookiesPerSale).toFixed(2),
     });
   };
-  useEffect(() => {
-    console.log();
-  }, [cookieStnds]);
   return (
     <main className={"my-8 w-full" + ` ${styles.main_content}`}>
       <CreateForm handleNewCookiesStand={handleNewCookiesStand} />{" "}
